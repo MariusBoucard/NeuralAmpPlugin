@@ -1,5 +1,4 @@
 #pragma once
-#include <JuceHeader.h>
 
 class DropDownLookAndFeel : public juce::LookAndFeel_V4
 {

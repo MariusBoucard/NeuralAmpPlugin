@@ -12,7 +12,7 @@ void TopBarComponent::paint(juce::Graphics& g)
     g.fillRect(bounds.removeFromBottom(1.0f));
 }
 
-void TopBarComponent::showSettingsModal(AudioProcessor& inProcessor)
+void TopBarComponent::showSettingsModal(juce::AudioProcessor& inProcessor)
 {
     auto* modal = new SettingsModal(inProcessor);
 
@@ -27,7 +27,7 @@ void TopBarComponent::showSettingsModal(AudioProcessor& inProcessor)
 
 }
 
-TopBarComponent::SettingsModal::SettingsModal(AudioProcessor& inProcessor)
+TopBarComponent::SettingsModal::SettingsModal(juce::AudioProcessor& inProcessor)
     : mProcessor(inProcessor)
 {
     setLookAndFeel(&mLookAndFeel);

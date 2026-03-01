@@ -28,8 +28,8 @@ juce::File SkeletonAudioProcessor::createJucePathFromFile(const juce::String& fi
 }
 
 SkeletonAudioProcessor::SkeletonAudioProcessor(juce::AudioProcessorValueTreeState& inParameters, ParameterSetup& inParameterSetup)
-    : AudioProcessor(BusesProperties().withInput("Input", AudioChannelSet::mono())
-        .withOutput("Output", AudioChannelSet::stereo()))
+    : AudioProcessor(BusesProperties().withInput("Input", juce::AudioChannelSet::mono())
+        .withOutput("Output", juce::AudioChannelSet::stereo()))
     , mParameters(inParameters)
     , mParameterSetup(inParameterSetup)
     , mBlockSize(256)
@@ -38,7 +38,7 @@ SkeletonAudioProcessor::SkeletonAudioProcessor(juce::AudioProcessorValueTreeStat
     , mNoiseGateTrigger(new dsp::noise_gate::Trigger())
     , mNoiseGateGain(new dsp::noise_gate::Gain())
     , mParamListener(*this,mToneStack, mNoiseGateGain, mNoiseGateTrigger, mParameterSetup)
-    , mIsNAMEnabled(true)
+    , mIsNAMEnabled(false)
     , mIRPath()
     , mIRVerbPath()
     , mIsIRLoading(true)
@@ -87,7 +87,7 @@ SkeletonAudioProcessor::~SkeletonAudioProcessor()
     delete[] mFloatBuffer;
     delete[] mTempFloatBuffer;
 }  
-void SkeletonAudioProcessor::updateMeter(bool isOutput, AudioBuffer<float>& buffer,int numSamples,int numChannels)
+void SkeletonAudioProcessor::updateMeter(bool isOutput, juce::AudioBuffer<float>& buffer,int numSamples,int numChannels)
 {
     for (int channel = 0; channel < numChannels; ++channel)
     {
@@ -108,7 +108,7 @@ void SkeletonAudioProcessor::updateMeter(bool isOutput, AudioBuffer<float>& buff
         }
     }
 }
-void SkeletonAudioProcessor::processBlock(AudioBuffer<float>& buffer, MidiBuffer&)
+void SkeletonAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer&)
 {
     buffer.applyGain(mParameters.getParameterAsValue("input").getValue());
 

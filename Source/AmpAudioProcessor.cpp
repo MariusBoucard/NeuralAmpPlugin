@@ -28,8 +28,8 @@ juce::File AmpAudioProcessor::createJucePathFromFile(const juce::String& filePat
 }
 
 AmpAudioProcessor::AmpAudioProcessor()
-    : AudioProcessor(BusesProperties().withInput("Input", AudioChannelSet::mono())
-    . withOutput("Output", AudioChannelSet::stereo()))
+    : AudioProcessor(BusesProperties().withInput("Input", juce::AudioChannelSet::mono())
+    . withOutput("Output", juce::AudioChannelSet::stereo()))
     , mParameters(*this, nullptr, "PARAMETERS", createParameterLayout())
     , mParameterSetup()
     , mSkeletonAmpProcessor(mParameters,mParameterSetup)
@@ -41,8 +41,8 @@ AmpAudioProcessor::~AmpAudioProcessor()
    
 }
 
-void AmpAudioProcessor::processBlock(AudioBuffer<float>& buffer, MidiBuffer&)
+void AmpAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer&)
 {
-  mSkeletonAmpProcessor.processBlock(buffer, MidiBuffer());
+  mSkeletonAmpProcessor.processBlock(buffer, juce::MidiBuffer());
 
 }

@@ -6,8 +6,8 @@
   ==============================================================================
 */
 
-#include <JuceHeader.h>
 #include "AmpAudioProcessor.h"
+#include <juce_audio_processors_headless/juce_audio_processors_headless.h>
 
 //==============================================================================
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()

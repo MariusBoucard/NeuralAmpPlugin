@@ -1,5 +1,8 @@
 #pragma once
-#include <JuceHeader.h>
+#include <juce_audio_processors_headless/juce_audio_processors_headless.h>
+#include <juce_audio_processors/juce_audio_processors.h>
+
+#include "BinaryData.h"
 #include "NAM/dsp.h"
 #include "Bones/ToneStack.h"
 #include "dsp/NoiseGate.h"
@@ -9,8 +12,10 @@
 #include "Mappers.h"
 
 #include "Processor.hpp"
+
+
 //==============================================================================
-class SkeletonAudioProcessor final : public AudioProcessor
+class SkeletonAudioProcessor final : public juce::AudioProcessor
 {
 public:
 
@@ -22,25 +27,27 @@ public:
 
     juce::File createJucePathFromFile(const juce::String& filePath);
 
-    void prepareToPlay(double, int) override
+    void prepareToPlay(double inSr, int inBlockSize) override
     {
-        mSampleRate = getSampleRate();
-		mBlockSize = getBlockSize();
+        mSampleRate = inSr;
+		mBlockSize = inBlockSize;
         mModel->ResetAndPrewarm(mSampleRate, mBlockSize);
         Mappers::getMapperInstance().setSampleRate(mSampleRate);
     }
     void releaseResources() override {}
-    void processBlock(AudioBuffer<float>& buffer, MidiBuffer&) override;
-    void updateMeter(bool isOutput, AudioBuffer<float>& buffer, int numSamples, int numChannels);
+
+    void processBlock(juce::AudioBuffer<float> &buffer, juce::MidiBuffer &) override;
+
+    void updateMeter(bool isOutput, juce::AudioBuffer<float>& buffer, int numSamples, int numChannels);
 
     //==============================================================================
-    AudioProcessorEditor* createEditor() override {
+    juce::AudioProcessorEditor* createEditor() override {
         return nullptr;
     }
     bool hasEditor() const override { return false; }
 
     //==============================================================================
-    const String getName() const override { return "Ballzzy's NAM"; }
+    const juce::String getName() const override { return "Ballzzy's NAM"; }
     bool acceptsMidi() const override { return false; }
     bool producesMidi() const override { return false; }
     double getTailLengthSeconds() const override { return 0; }
@@ -49,8 +56,8 @@ public:
     int getNumPrograms() override { return 1; }
     int getCurrentProgram() override { return 0; }
     void setCurrentProgram(int) override {}
-    const String getProgramName(int) override { return "None"; }
-    void changeProgramName(int, const String&) override {}
+    const juce::String getProgramName(int) override { return "None"; }
+    void changeProgramName(int, const juce::String&) override {}
 
     void loadImpulseResponse(const juce::File& path);
     void loadImpulseResponseVerb(const juce::File& path);
@@ -219,13 +226,13 @@ public:
         
     }
 
-    void getStateInformation(MemoryBlock& destData) override
+    void getStateInformation(juce::MemoryBlock& destData) override
     {
 	}
 
 private:
     //==============================================================================
-    AudioParameterFloat* gain;
+    juce::AudioParameterFloat* gain;
     juce::AudioProcessorValueTreeState& mParameters;
     ParameterSetup& mParameterSetup;
     std::unique_ptr<nam::DSP> mModel;

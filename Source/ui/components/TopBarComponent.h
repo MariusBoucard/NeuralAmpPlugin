@@ -1,5 +1,6 @@
 #pragma once
-#include <JuceHeader.h>
+#include <juce_gui_basics/juce_gui_basics.h>
+#include <juce_audio_processors_headless/juce_audio_processors_headless.h>
 #include "../../looknfeel/TopBarLookAndFeel.h"
 
 class TopBarComponent : public juce::Component
@@ -57,7 +58,7 @@ public:
             VerbIRDir
         } ;
 
-        SettingsModal(AudioProcessor& inProcessor);
+        SettingsModal(juce::AudioProcessor& inProcessor);
      
         ~SettingsModal() override {
             mDirectoryChooserNAMButton.setLookAndFeel(nullptr);
@@ -112,7 +113,7 @@ public:
     };
 
 private:
-    void showSettingsModal(AudioProcessor& inProcessor);
+    void showSettingsModal(juce::AudioProcessor& inProcessor);
 
 
 private:

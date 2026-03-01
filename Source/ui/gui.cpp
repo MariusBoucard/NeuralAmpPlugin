@@ -1,7 +1,6 @@
 #include "gui.h"
 
 #include "../dsp/Processor.h"
-#include <JuceHeader.h>
 int RootViewComponent::ROOT_WIDTH = 980;
 int RootViewComponent::ROOT_HEIGHT = 550;
 
@@ -44,7 +43,7 @@ RootViewComponent::~RootViewComponent()
     mVerbDropDown.setLookAndFeel(nullptr);
 }
 
-void RootViewComponent::setSliderAttachement(AudioProcessor& inProcessoe)
+void RootViewComponent::setSliderAttachement(juce::AudioProcessor& inProcessoe)
 {
     SkeletonAudioProcessor* ampAudioProcessor = dynamic_cast<SkeletonAudioProcessor*>(&inProcessoe);
     mInputAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
@@ -73,7 +72,7 @@ void RootViewComponent::updatePath()
 {
     SkeletonAudioProcessor* ampAudioProcessor = dynamic_cast<SkeletonAudioProcessor*>(&processor);
 
-    DirectoryIterator iter(ampAudioProcessor->getNAMPath(), false, "*", juce::File::findFiles);
+    juce::DirectoryIterator iter(ampAudioProcessor->getNAMPath(), false, "*", juce::File::findFiles);
     int itemId = 1;
     mNAMFileList.clear();
 	mNAMChooserButton.clear();
@@ -109,7 +108,7 @@ void RootViewComponent::updatePath()
     mFileChooserButton.setJustificationType(juce::Justification::centred);
 
 
-    DirectoryIterator iter2(ampAudioProcessor->getIRPath(), false, "*", juce::File::findFiles);
+    juce::DirectoryIterator iter2(ampAudioProcessor->getIRPath(), false, "*", juce::File::findFiles);
     int itemId2 = 1;
 
     mIRFileList.clear();
@@ -142,7 +141,7 @@ void RootViewComponent::updatePath()
         }
     };
 
-    DirectoryIterator iter3(ampAudioProcessor->getIRVerbPath(), false, "*", juce::File::findFiles);
+    juce::DirectoryIterator iter3(ampAudioProcessor->getIRVerbPath(), false, "*", juce::File::findFiles);
     int itemId3 = 1;
 
     mVerbFileList.clear();

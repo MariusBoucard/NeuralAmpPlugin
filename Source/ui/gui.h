@@ -1,9 +1,9 @@
 #pragma once
+#include <juce_audio_processors/juce_audio_processors.h>
 #include "../looknfeel/StripKnob_look_n_feel.h"
 #include "../looknfeel/ToogleButtonLookAndFeel.h"
 #include "../looknfeel/TopBarLookAndFeel.h"
 #include "components/TopBarComponent.h"
-#include <JuceHeader.h>
 
 class RootViewComponent : public juce::AudioProcessorEditor
 {
