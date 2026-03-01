@@ -46,7 +46,7 @@ public:
     AmpAudioProcessor();
     ~AmpAudioProcessor() override;
 
-    juce::AudioProcessorValueTreeState::ParameterLayout AmpAudioProcessor::createParameterLayout()
+    juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout()
     {
         std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
 
@@ -94,7 +94,7 @@ public:
         mParameters.state.writeToStream(stream);  
     }
 
-    juce::File AmpAudioProcessor::createJucePathFromFile(const juce::String& filePath);
+    juce::File createJucePathFromFile(const juce::String& filePath);
 
     void setStateInformation (const void* data, int sizeInBytes) override
     {
@@ -123,7 +123,7 @@ public:
         return (mainInLayout == mainOutLayout && (! mainInLayout.isDisabled()));
     }
 
-    juce::AudioProcessorValueTreeState& AmpAudioProcessor::getCustomParameterTree()
+    juce::AudioProcessorValueTreeState& getCustomParameterTree()
     {
         return mParameters;
     }

@@ -1,6 +1,6 @@
 
 
-void RootViewComponent::defineKnobLayout()
+void defineKnobLayout()
 {
     mTopBarLayout.inLayout.x = 0;
     mTopBarLayout.inLayout.y = 0;
@@ -149,7 +149,7 @@ void RootViewComponent::defineKnobLayout()
 }
 
 
-void RootViewComponent::configureNodes(juce::AudioProcessor& inProcessor)
+void configureNodes(juce::AudioProcessor& inProcessor)
 {
     auto bounds = getLocalBounds();
 

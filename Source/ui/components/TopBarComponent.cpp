@@ -1,5 +1,5 @@
 #include "TopBarComponent.h"
-#include "../../dsp/processor.h"
+#include "../../dsp/Processor.h"
 #include "../gui.h"
 
 void TopBarComponent::paint(juce::Graphics& g)

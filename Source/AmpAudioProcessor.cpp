@@ -41,8 +41,8 @@ AmpAudioProcessor::~AmpAudioProcessor()
    
 }
 
-void AmpAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer&)
+void AmpAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer& inMidi)
 {
-  mSkeletonAmpProcessor.processBlock(buffer, juce::MidiBuffer());
+  mSkeletonAmpProcessor.processBlock(buffer, inMidi);
 
 }
